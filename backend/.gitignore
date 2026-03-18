@@ -1,0 +1,9 @@
+# ── Never commit secrets (use .env locally; set vars in host dashboard when deploying) ──
+.env
+.env.local
+.env.*.local
+
+# Local SQLite (rebuilt by sync on server)
+data/*.db
+data/*.db-wal
+data/*.db-shm

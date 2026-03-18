@@ -1,0 +1,12 @@
+# Secrets stay local — copy backend/.env.example → backend/.env (never push .env)
+backend/.env
+backend/.env.local
+frontend/.env
+frontend/.env.local
+
+# Local DB cache (optional to ignore; empty dir can stay in repo)
+backend/data/*.db
+backend/data/*.db-wal
+backend/data/*.db-shm
+
+node_modules/
