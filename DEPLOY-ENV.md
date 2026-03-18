@@ -31,6 +31,12 @@ Your host does not use the `.env` file from the repo. You set the **same variabl
 
 After deploy, run **Sync** once so SQLite fills on the server (or ensure `backend/data` is writable).
 
-## Frontend + API URL
+## Frontend + API URL (Render Static Site)
 
-If the frontend is not served by the same origin as the API, set Vite’s API base at build time (e.g. `VITE_API_URL`) — that’s a separate change from `.env` on the backend.
+Set at **build time** on Render:
+
+| Variable | Example |
+|----------|---------|
+| `VITE_API_URL` | `https://your-backend.onrender.com` (no trailing slash) |
+
+The frontend prefixes all `/api/...` calls with this URL. Redeploy the static site after changing it.

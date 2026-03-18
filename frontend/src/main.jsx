@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import Login from './components/Login.jsx';
-import { setAuthToken, clearAuthToken, getAuthToken } from './utils/apiAuth';
+import { setAuthToken, clearAuthToken, getAuthToken, apiUrl } from './utils/apiAuth';
 import './App.css';
 
 function Root() {
@@ -12,7 +12,7 @@ function Root() {
   const bump = useCallback(() => setSessionKey((k) => k + 1), []);
 
   useEffect(() => {
-    fetch('/api/auth/config')
+    fetch(apiUrl('/api/auth/config'))
       .then(async (r) => {
         const data = await r.json().catch(() => ({}));
         if (!r.ok) {

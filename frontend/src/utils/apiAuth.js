@@ -1,5 +1,14 @@
 const STORAGE_KEY = 'sc_auth_token';
 
+/** Production: set VITE_API_URL on Render (e.g. https://your-api.onrender.com). Dev: leave unset → same-origin + Vite proxy. */
+export function apiUrl(pathOrUrl) {
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
+  const base = (import.meta.env.VITE_API_URL || '').trim().replace(/\/$/, '');
+  const p = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`;
+  if (!base) return p;
+  return `${base}${p}`;
+}
+
 export function getAuthToken() {
   try {
     return sessionStorage.getItem(STORAGE_KEY);
@@ -27,7 +36,7 @@ export async function authFetch(url, options = {}) {
     ...(options.headers || {}),
     ...authHeaders(),
   };
-  const res = await fetch(url, { ...options, headers });
+  const res = await fetch(apiUrl(url), { ...options, headers });
   if (res.status === 401) {
     clearAuthToken();
     try {
